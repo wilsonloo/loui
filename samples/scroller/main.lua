@@ -1,20 +1,21 @@
-# loui
-base love2d engine scroller(verticilly)
-
-## Usage
-```lua
 local Scroller = require "loui.scroller"
 
--- 创建实例
 local scroller = Scroller.new(30, 60, 200, 300)
 
--- 打印文本
-scroller:print("world", 100, 50)
-
--- 划线
-scroller:line(x1, y1, x2, y2, ...)
+local data_loaded = false
+local function load_datas()
+    if not (data_loaded) then
+        scroller:print("hello", 0, 0)
+        scroller:print("world", 100, 50)
+        for k = 1, 20 do
+            scroller:print("new line", 0, 100 + k * 50)
+        end
+        data_loaded = true
+    end
+end
 
 function love.update(dt)
+    load_datas()
     scroller:update(dt)
 end
 
@@ -29,5 +30,3 @@ end
 function love.mousereleased(x, y, button)
     scroller:mousereleased(x, y, button)
 end
-
-```
